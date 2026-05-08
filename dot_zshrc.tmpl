@@ -52,6 +52,8 @@ alias gp='git pull'
 alias gd='git diff'
 
 # Use modern replacements if installed
+command -v fdfind &>/dev/null && alias fd='fdfind'
+command -v batcat &>/dev/null && alias bat='batcat' && alias cat='batcat --style=plain'
 command -v eza  &>/dev/null && alias ls='eza --icons'
 command -v eza  &>/dev/null && alias ll='eza -lah --icons --git'
 command -v bat  &>/dev/null && alias cat='bat --style=plain'
