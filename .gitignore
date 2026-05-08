@@ -1,0 +1,10 @@
+# chezmoi local config — contains personal data, never commit
+.chezmoi.toml
+.chezmoi.toml.bak*
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp
