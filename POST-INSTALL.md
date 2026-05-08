@@ -104,11 +104,13 @@ command -v fdfind &>/dev/null && alias fd='fdfind'
 command -v batcat &>/dev/null && alias bat='batcat' && alias cat='batcat --style=plain'
 ```
 
-Or manage this through chezmoi:
+Or manage this through chezmoi so it persists across machines:
 ```bash
 chezmoi edit ~/.zshrc
-# add the lines above, then:
+# paste the two `command -v ...` lines above into the aliases section, save, then:
 chezmoi apply
+cd ~/dotfiles && git add dot_zshrc.tmpl && git commit -m "feat: ubuntu fd/bat alias normalization"
+git push
 ```
 
 **Verify everything works:**
