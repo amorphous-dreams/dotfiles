@@ -157,26 +157,12 @@ fzf --version   # then try Ctrl+R in your shell for fuzzy history search
 Adds completion definitions for tools zsh doesn't include by default:
 `docker`, `kubectl`, `gh`, `cargo`, `pip`, `npm`, and hundreds more.
 
-```bash
-git clone --depth=1 https://github.com/zsh-users/zsh-completions \
-  ~/.zsh/zsh-completions
-```
+This is now wired into the bootstrap — `install.sh` clones the plugin and
+`dot_zshrc.tmpl` already has the `fpath` + `compinit` lines (loaded before
+autosuggestions, as completion order requires). Just run:
 
-Add to `~/.zshrc` **before** the other plugins (order matters for completions):
 ```bash
-chezmoi edit ~/.zshrc
-```
-
-Add these lines near the top of the plugins section, before autosuggestions:
-```zsh
-# zsh-completions — must be loaded before compinit
-fpath=(~/.zsh/zsh-completions/src $fpath)
-autoload -Uz compinit && compinit
-```
-
-Then apply and reload:
-```bash
-chezmoi apply
+bash ~/dotfiles/install.sh --update
 source ~/.zshrc
 ```
 
@@ -186,18 +172,13 @@ docker run --<TAB>   # should show flags with descriptions
 gh repo <TAB>        # if gh CLI is installed
 ```
 
-Or manage the plugin via `install.sh` — open `~/dotfiles/install.sh` and add:
-```bash
-install_plugin "zsh-completions" \
-  "https://github.com/zsh-users/zsh-completions" \
-  "zsh-completions"
-```
-
-Then add the `fpath` line to `dot_zshrc.tmpl` in your dotfiles repo.
+If you're setting this up on a machine that ran an older `install.sh` (before
+the `zsh-completions` line was added), the `--update` flag above will pick up
+the new plugin entry on the next run.
 
 ---
 
-## 4. Extended history with timestamps
+## 4. Extended history with timestamps (optional)
 
 Zsh's `EXTENDED_HISTORY` saves the timestamp and wall-clock duration of every command.
 Useful forensically — "what exactly did I run Tuesday?" or "how long did that build take?"
@@ -227,7 +208,7 @@ git push
 
 ---
 
-## 5. Starship extras worth knowing
+## 5. Starship extras worth knowing (optional)
 
 **Show time in prompt** (off by default — add to `starship.toml`):
 ```toml

@@ -179,7 +179,9 @@ install_plugin() {
   fi
 }
 
-install_plugin "zsh-autosuggestions"    "https://github.com/zsh-users/zsh-autosuggestions"    "zsh-autosuggestions"
+# Order matches load order in dot_zshrc.tmpl — zsh-completions must be on fpath before compinit
+install_plugin "zsh-completions"         "https://github.com/zsh-users/zsh-completions"         "zsh-completions"
+install_plugin "zsh-autosuggestions"     "https://github.com/zsh-users/zsh-autosuggestions"     "zsh-autosuggestions"
 install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting"
 
 # ── Step 8: PATH note ────────────────────────────────────────────────────────
