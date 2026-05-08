@@ -97,6 +97,11 @@ Install `zoxide`:
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 ```
 
+Install `fzf` (fuzzy finder — powers `Ctrl+R` history search and `Ctrl+T` file picker once wired up):
+```bash
+sudo apt-get install -y fzf
+```
+
 **Add Ubuntu-specific alias fixes to `~/.zshrc`** (needed because of Ubuntu's naming):
 ```bash
 # Ubuntu renames some tools — normalize them
@@ -120,6 +125,7 @@ bat ~/.zshrc
 fd --type f --extension sh ~
 rg "starship" ~/.zshrc
 z ~   # or just start navigating — zoxide learns over time
+fzf --version   # then try Ctrl+R in your shell for fuzzy history search
 ```
 
 ---
