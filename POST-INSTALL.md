@@ -102,6 +102,28 @@ Install `fzf` (fuzzy finder — powers `Ctrl+R` history search and `Ctrl+T` file
 sudo apt-get install -y fzf
 ```
 
+Then enable the keybindings and completion in `~/.zshrc` (Ubuntu's package ships them under `/usr/share/doc/fzf/examples/`):
+```zsh
+# fzf — fuzzy finder integration
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ]   && source /usr/share/doc/fzf/examples/completion.zsh
+```
+
+Manage through chezmoi so it persists:
+```bash
+chezmoi edit ~/.zshrc
+# paste the two source lines above near the bottom, save, then:
+chezmoi apply
+cd ~/dotfiles && git add dot_zshrc.tmpl && git commit -m "feat: fzf keybindings + completion"
+git push
+```
+
+After reloading (`source ~/.zshrc`), you get:
+- `Ctrl+R` — fuzzy search shell history
+- `Ctrl+T` — fuzzy file picker (insert path into command line)
+- `Alt+C` — fuzzy `cd` into a subdirectory
+- `**<TAB>` — fuzzy completion for paths/processes (e.g. `kill **<TAB>`)
+
 **Add Ubuntu-specific alias fixes to `~/.zshrc`** (needed because of Ubuntu's naming):
 ```bash
 # Ubuntu renames some tools — normalize them
