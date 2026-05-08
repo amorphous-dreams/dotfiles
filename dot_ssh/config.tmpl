@@ -1,0 +1,35 @@
+# ~/.ssh/config — managed by chezmoi
+# context: {{ .context }}
+
+# ── Shared defaults ───────────────────────────────────────────────────────────
+Host *
+  AddKeysToAgent    yes
+  IdentityFile      ~/.ssh/id_ed25519
+  ServerAliveInterval 60
+  ServerAliveCountMax  3
+
+# ── GitHub ────────────────────────────────────────────────────────────────────
+Host github.com
+  HostName github.com
+  User     git
+  IdentityFile ~/.ssh/id_ed25519
+
+{{- if eq .context "personal" }}
+
+# ── Personal / amorphous-dreams ───────────────────────────────────────────────
+# If you have a separate key for the org, add it here:
+# Host github-amorphous
+#   HostName github.com
+#   User     git
+#   IdentityFile ~/.ssh/id_ed25519_amorphous
+
+{{- else if eq .context "work" }}
+
+# ── Work ──────────────────────────────────────────────────────────────────────
+# Add any internal jump hosts or bastion servers here:
+# Host bastion.internal
+#   HostName bastion.internal
+#   User     {{ .githubUser }}
+#   IdentityFile ~/.ssh/id_ed25519
+
+{{- end }}

@@ -1,0 +1,25 @@
+# ~/.bashrc — managed by chezmoi
+# context: {{ .context }}
+# If using zsh as default shell this file is still sourced by non-login bash sessions.
+
+# ── nvm ───────────────────────────────────────────────────────────────────────
+# >>> nvm start <<<
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# <<< nvm end <<<
+
+# ── SSH agent ─────────────────────────────────────────────────────────────────
+# >>> ssh-agent start <<<
+if [ -z "$SSH_AGENT_PID" ] || ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+if [[ -f ~/.ssh/id_ed25519 ]]; then
+  ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519 2>/dev/null
+fi
+# <<< ssh-agent end <<<
+
+export DOTFILES_CONTEXT="{{ .context }}"
+
+# ── Starship prompt ───────────────────────────────────────────────────────────
+command -v starship &>/dev/null && eval "$(starship init bash)"

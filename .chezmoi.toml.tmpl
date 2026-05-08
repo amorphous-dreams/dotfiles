@@ -1,0 +1,9 @@
+{{- /* .chezmoi.toml.tmpl — runs once per machine, answers stored in ~/.config/chezmoi/chezmoi.toml */ -}}
+{{- /* Re-running chezmoi apply never re-prompts — answers are cached. */ -}}
+{{- /* To re-answer: chezmoi init --force */ -}}
+
+[data]
+  context    = {{ promptChoiceOnce . "context"    "Machine context"    (list "personal" "work") | quote }}
+  name       = {{ promptStringOnce  . "name"       "Your full name"                              | quote }}
+  email      = {{ promptStringOnce  . "email"      "Your email address"                          | quote }}
+  githubUser = {{ promptStringOnce  . "githubUser" "Your GitHub username"                        | quote }}
